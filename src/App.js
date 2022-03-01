@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './assets/styles.css'
+import "bootstrap/dist/css/bootstrap.min.css"
+import BandInfo from './components/BandInfo/BandInfo';
+import BandPhotos from './components/BandPhotos/BandPhotos';
+import Navbar from './components/Navbar/Navbar';
+import TourCard from './components/TourCard/TourCard'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar/>
+      <div>
+        <h1>welcome</h1>
+        <h2>Halo kawan</h2>
+      </div>
+      <BandInfo/>
+      <BandPhotos/>
+      <div>
+        <TourCard />
+        <TourCard />
+        <TourCard />
+      </div>
+    </>
+  
   );
 }
 
