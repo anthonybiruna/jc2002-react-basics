@@ -1,28 +1,26 @@
-
-import './assets/styles.css'
+import "./assets/styles.css"
 import "bootstrap/dist/css/bootstrap.min.css"
-import BandInfo from './components/BandInfo/BandInfo';
-import BandPhotos from './components/BandPhotos/BandPhotos';
-import Navbar from './components/Navbar/Navbar';
-import TourCard from './components/TourCard/TourCard'
+import BandSection from "./components/BandSection/BandSection";
+import Navbar from './components/Navbar/Navbar'
+import TourSection from "./components/TourSection/TourSection";
+import ClassComponent from "./components/ClassComponent/ClassComponent";
+import ContentCard from "./components/ContentCard/ContentCard";
 
 function App() {
   return (
     <>
-      <Navbar/>
-      <div>
-        <h1>welcome</h1>
-        <h2>Halo kawan</h2>
+      <Navbar />
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-md-19 offset-md-1 col-lg-6 offset-lg-3">
+            <ContentCard />
+          </div>
+        </div>
       </div>
-      <BandInfo/>
-      <BandPhotos/>
-      <div>
-        <TourCard />
-        <TourCard />
-        <TourCard />
-      </div>
+      {/* <BandSection />
+      <TourSection />
+      <ClassComponent /> */}
     </>
-  
   );
 }
 
