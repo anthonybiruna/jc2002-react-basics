@@ -77,12 +77,14 @@ function App() {
   }
 
   const renderTodoList = () => {
-    return todoList.map((val) => {
+    return todoList.map((val, idx) => {
       return (
         <TodoItem
           date={val.date}
           action={val.action}
           isDone={val.isDone}
+          deleteItem={() => deleteTodoItem(idx)}
+          toggleStatus={() => toggleTodoStatus(idx)}
         />
       )
     })
@@ -93,32 +95,48 @@ function App() {
     setFullName("jane bar")
   }
 
-  const [todoInputValue, setTodoInputValue] = useState("")
-  const [dateInputValue, setDateInputValue] = useState("")
+  const [inputValues, setInputValues] = useState({
+    todoInput: "",
+    dateInput: "",
+  })
 
   const inputHandler = (event) => {
-    const { value } = event.target;
+    const { value, name } = event.target;
 
-    // console.log(value)
-    setTodoInputValue(value)
-  }
-
-  const dateHandler = (event) => {
-    const { value } = event.target;
-
-   
-    setDateInputValue(value)
-  }
-
-  const addToItem = () => {
-    let newTodoArray = [...todoList]
-    newTodoArray.push({
-      date: dateInputValue,
-      action: todoInputValue,
-      isDone: false
-    }
+    setInputValues(
+      {
+        ...inputValues,
+        [name]: value
+      }
     )
+  }
+
+  const addTodoItem = () => {
+    const newTodoArray = [...todoList]
+
+    newTodoArray.push({
+      date: inputValues.dateInput,
+      action: inputValues.todoInput,
+      isDone: false
+    })
+
     setTodoList(newTodoArray)
+  }
+
+  const deleteTodoItem = (index) => {
+    const deleteTodoArray = [...todoList]
+
+    deleteTodoArray.splice(index, 1)
+
+    setTodoList(deleteTodoArray)
+  }
+
+  const toggleTodoStatus = (index) => {
+    const duplicateTodoArray = [...todoList]
+
+    duplicateTodoArray[index].isDone = !duplicateTodoArray[index].isDone
+
+    setTodoList(duplicateTodoArray)
   }
 
   return (
@@ -127,11 +145,12 @@ function App() {
       <div className="container">
         <div className='row my-3'>
           <div className='offset-3 col-5'>
-            <Input onChange={inputHandler} />
-            <Input onChange={dateHandler} />
+            <Input name='todoInput' onChange={inputHandler} />
+            <Input name='dateInput' onChange={inputHandler} type='date' />
+
           </div>
           <div className='col-2'>
-            <Button onClick={addToItem} color='success'>Add Todo</Button>
+            <Button onClick={addTodoItem} color='success'>Add Todo</Button>
           </div>
         </div>
         <div className="row">
