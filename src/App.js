@@ -35,27 +35,27 @@ function App() {
   const [fullName, setFullName] = useState("")
   const [todoList, setTodoList] = useState([
     {
-      date: "12 Feb 2022",
+      date: new Date(),
       action: "Belajar Fundamental",
       isDone: true
     },
     {
-      date: "14 Feb 2022",
+      date: new Date(),
       action: "Beli coklat buat ayang",
       isDone: true
     },
     {
-      date: "28 Feb 2022",
+      date: new Date(),
       action: "Cicil project frontend",
       isDone: false
     },
     {
-      date: "1 Mar 2022",
+      date: new Date(),
       action: "Design project",
       isDone: false
     },
     {
-      date: "2 Mar 2022",
+      date: new Date(),
       action: "Bikin component library",
       isDone: true
     },
@@ -94,12 +94,31 @@ function App() {
   }
 
   const [todoInputValue, setTodoInputValue] = useState("")
+  const [dateInputValue, setDateInputValue] = useState("")
 
   const inputHandler = (event) => {
     const { value } = event.target;
 
     // console.log(value)
     setTodoInputValue(value)
+  }
+
+  const dateHandler = (event) => {
+    const { value } = event.target;
+
+   
+    setDateInputValue(value)
+  }
+
+  const addToItem = () => {
+    let newTodoArray = [...todoList]
+    newTodoArray.push({
+      date: dateInputValue,
+      action: todoInputValue,
+      isDone: false
+    }
+    )
+    setTodoList(newTodoArray)
   }
 
   return (
@@ -109,9 +128,10 @@ function App() {
         <div className='row my-3'>
           <div className='offset-3 col-5'>
             <Input onChange={inputHandler} />
+            <Input onChange={dateHandler} />
           </div>
           <div className='col-2'>
-            <Button color='success'>Add Todo</Button>
+            <Button onClick={addToItem} color='success'>Add Todo</Button>
           </div>
         </div>
         <div className="row">
